@@ -111,10 +111,12 @@ body {
   text-decoration: none !important;
 }
 
-
 /* show page  */
-.edit-btn{
+.edit-btn {
   text-decoration: none;
   color: white !important;
 }
 
+.btns {
+  display: flex;
+}

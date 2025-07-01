@@ -1,41 +1,37 @@
 <%layout("/Layouts/boilerplat.ejs")-%>
 
 <div class="row">
-  <div class="col-8 offset-2">
+  <div class="col-8 offset-3 mt-3">
     <h3>Listing details:</h3>
   </div>
   <div class="card">
-    <div class="card col-6 offset-2">
+    <div class="card col-6 offset-3 show-card">
       <img
         src="<%=list.image.url%>"
         class="card-img-top show-image"
         alt="listing-image"
       />
     </div>
-    <div class="card-body">
-      <h5 class="card-title"><b></b></h5>
+    <div class="card-body offset-3">
+      <h5 class="card-title"><b><%=list.title%></b></h5>
       <p class="card-text"><%=list.description %></p>
       <p class="card-text">
         &#x20B9;<%=list.price.toLocaleString("en-IN")%>/ night
       </p>
       <p class="card-text"><%=list.location %></p>
       <p class="card-text"><%=list.country %></p>
-      <div class="row">
-        <div class="col-3">
-          <button class="btn">
-            <a class="btn btn-success" href="/listing/<%=list._id%>/edit"
-              >Edit Listing</a
-            >
-          </button>
-        </div>
-        <div class="col-8">
-          <form method="post" action="/listing/<%=list._id%>?_method=DELETE">
-            <button class="btn btn-danger">Delete</button>
-          </form>
-        </div>
-      </div>
     </div>
-
-    <br />
   </div>
 </div>
+
+<div class="btns">
+  <a class="btn btn-dark col-1 offset-3" href="/listing/<%=list._id%>/edit"
+    >Edit
+  </a>
+
+  <form method="post" action="/listing/<%=list._id%>?_method=DELETE">
+    <button class="btn btn-dark offset-3">Delete</button>
+  </form>
+</div>
+
+<br />
