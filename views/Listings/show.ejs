@@ -1,37 +1,96 @@
 <%layout("/Layouts/boilerplat.ejs")-%>
 
-<div class="row">
+<div class="row mb-4">
   <div class="col-8 offset-3 mt-3">
-    <h3>Listing details:</h3>
-  </div>
-  <div class="card">
-    <div class="card col-6 offset-3 show-card">
-      <img
-        src="<%=list.image.url%>"
-        class="card-img-top show-image"
-        alt="listing-image"
-      />
+    <h3><%=list.title%></h3>
+    <div class="card listing-card">
+      <div class="card col-6 show-card listing-card">
+        <img
+          src="<%=list.image.url%>"
+          class="card-img-top show-image"
+          alt="listing-image"
+        />
+      </div>
+      <div class="card-body">
+        <p class="card-text"><%=list.description %></p>
+        <p class="card-text">
+          &#x20B9;<%=list.price?.toLocaleString("en-IN")%>/ night
+        </p>
+        <p class="card-text"><%=list.location %></p>
+        <p class="card-text"><%=list.country %></p>
+      </div>
     </div>
-    <div class="card-body offset-3">
-      <h5 class="card-title"><b><%=list.title%></b></h5>
-      <p class="card-text"><%=list.description %></p>
-      <p class="card-text">
-        &#x20B9;<%=list.price.toLocaleString("en-IN")%>/ night
-      </p>
-      <p class="card-text"><%=list.location %></p>
-      <p class="card-text"><%=list.country %></p>
+  </div>
+
+  <% if (currUser?.id === list?.owner?._id) { %>
+  <div class="btns">
+    <a class="btn btn-dark col-1 offset-3" href="/listings/<%=list._id%>/edit"
+      >Edit
+    </a>
+
+    <form method="post" action="/listings/<%=list._id%>?_method=DELETE">
+      <button class="btn btn-dark offset-3">Delete</button>
+    </form>
+  </div>
+  <% } %>
+  <br />
+
+  <div class="mt-2 mb-2 col-8 offset-3">
+    <hr />
+    <form
+      action="/listings/<%=list._id%>/reviews"
+      method="post"
+      novalidate
+      class="needs-validation"
+    >
+      <h3>Leave a Review</h3>
+      <div class="mt-2 mb-2">
+        <label for="rating" class="form-label">Rating </label>
+        <input
+          type="range"
+          class="form-range"
+          min="0"
+          max="5"
+          id="rating"
+          name="rating"
+        />
+      </div>
+      <div class="mt-2 mb-2">
+        <label for="comment" class="form-label">comment</label>
+        <textarea
+          name="comment"
+          id="comment"
+          rows="5"
+          class="form-control"
+          required
+        ></textarea>
+        <div class="invalid-feedback">Please Add some comment for review</div>
+      </div>
+      <button type="submit" class="btn btn-outline-dark mt-2 mb-2">
+        submit
+      </button>
+    </form>
+    <hr />
+    <h4><b>All Reviews</b></h4>
+    <div class="row">
+      <% for(review of list.reviews) { %>
+      <div class="card col-5 m-1">
+        <div class="card-body">
+          <h5 class="card-title"><%=review.author.username %></h5>
+          <p class="card-text"><%=review.comment %></p>
+          <p class="card-text"><%=review.rating %> stars</p>
+        </div>
+        <form
+          action="/listings/<%= list._id %>/reviews/<%=review._id %>?_method=DELETE"
+          method="post"
+          class="mt-1 mb-1"
+        >
+          <button class="btn btn-dark">Delete</button>
+        </form>
+      </div>
+      <% } %>
     </div>
   </div>
+
+  <br />
 </div>
-
-<div class="btns">
-  <a class="btn btn-dark col-1 offset-3" href="/listing/<%=list._id%>/edit"
-    >Edit
-  </a>
-
-  <form method="post" action="/listing/<%=list._id%>?_method=DELETE">
-    <button class="btn btn-dark offset-3">Delete</button>
-  </form>
-</div>
-
-<br />

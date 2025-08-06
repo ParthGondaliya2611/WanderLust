@@ -3,7 +3,12 @@
 <div class="row">
   <div class="col-8 offset-2">
     <h3>Edit Listing</h3>
-    <form method="post" action="/listing/<%-list._id%>?_method=PUT">
+    <form
+      method="post"
+      action="/listings/<%-list._id%>?_method=PUT"
+      novalidate
+      class="needs-validation"
+    >
       <div>
         <label for="title" class="form-label">title</label>
         <input
@@ -12,22 +17,21 @@
           placeholder="Enter Listing title"
           class="form-control"
           value="<%-list.title%>"
+          required
         />
+        <div class="valid-feedback">Title Looks Good!</div>
+        <div class="invalid-feedback">Please Enter valid Title</div>
       </div>
 
       <br />
       <div>
         <label for="description" class="form-label">description</label>
-        <textarea
-          name="description"
-          rows="4"
-          placeholder="Enter description"
-          cols="20"
-          class="form-control"
-        >
+        <textarea name="description"  class="form-control" rows="5" required>
+
       <%-list.description%>
       </textarea
         >
+        <div class="invalid-feedback">Please Enter valid Description</div>
       </div>
       <br />
 
@@ -38,6 +42,7 @@
           name="url"
           placeholder="Enter image URL"
           class="form-control"
+          required
           value="<%-list.image.url%>"
         />
       </div>
@@ -47,11 +52,14 @@
         <label for="filename" class="form-label">filename</label>
         <input
           type="text"
+          required
           name="filename"
           placeholder="Enter image FileName"
           class="form-control"
           value="<%-list.image.filename%>"
         />
+        <div class="invalid-feedback">Please Enter valid FileName</div>
+
         <br />
       </div>
       <div class="row">
@@ -59,33 +67,44 @@
           <label for="number" class="form-label">number</label>
           <input
             type="number"
+            required
             name="price"
             placeholder="Enter Price"
             class="form-control"
             value="<%- list.price  %>"
           />
+          <div class="invalid-feedback">Please Enter valid Price</div>
+
           <br />
         </div>
         <div class="mb-3 col-8">
           <label for="country" class="form-label">country</label>
           <input
             type="text"
+            required
             name="country"
             class="form-control"
             placeholder="Enter Your location"
             value="<%- list.country  %>"
-          /><br />
+          />
+          <div class="invalid-feedback">Please Enter valid Country</div>
+
+          <br />
         </div>
       </div>
       <div>
         <label for="location" class="form-label">Location</label>
         <input
+          required
           type="text"
           name="location"
           class="form-control"
           placeholder="Enter Your location"
           value="<%-list.location%>"
-        /><br />
+        />
+        <div class="invalid-feedback">Please Enter valid Location</div>
+
+        <br />
       </div>
 
       <div><button class="btn btn-dark edit-btn">Edit</button></div>

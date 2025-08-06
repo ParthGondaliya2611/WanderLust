@@ -1,0 +1,49 @@
+<%layout("/Layouts/boilerplat.ejs")-%>
+<div class="row mt-2">
+  <div class="col-8 offset-2">
+    <h2>SignUp in Wanderlust</h2>
+    <br />
+    <form method="post" action="/signup" novalidate class="needs-validation">
+      <div>
+        <label for="username" class="form-label">username</label>
+        <input
+          type="text"
+          name="username"
+          placeholder="Enter your username"
+          class="form-control"
+          required
+        />
+        <div class="valid-feedback">username Looks Good!</div>
+      </div>
+      <br />
+
+      <div>
+        <label for="email" class="form-label">email</label>
+        <input
+          type="email"
+          name="email"
+          placeholder="Enter your email"
+          class="form-control"
+          required
+        />
+        <div class="valid-feedback">email Looks Good!</div>
+      </div>
+      <br />
+
+      <div>
+        <label for="password" class="form-label">password</label>
+        <input
+          type="password"
+          name="password"
+          placeholder="Enter your password"
+          class="form-control"
+          required
+        />
+        <div class="valid-feedback">password Looks Good!</div>
+      </div>
+      <br />
+
+      <button class="btn btn-success">signUp</button>
+    </form>
+  </div>
+</div>

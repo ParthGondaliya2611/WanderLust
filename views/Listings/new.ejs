@@ -3,7 +3,12 @@
 <div class="row">
   <div class="col-8 offset-2">
     <h3>Create a New Listing</h3>
-    <form method="post" action="/listing/create">
+    <form
+      method="post"
+      action="/listings"
+      novalidate
+      class="needs-validation"
+    >
       <div>
         <label for="title" class="form-label">Title</label>
         <input
@@ -11,20 +16,18 @@
           name="title"
           placeholder="Enter Listing title"
           class="form-control"
+          required
         />
+        <div class="valid-feedback">Title Looks Good!</div>
+        <div class="invalid-feedback">Please Enter valid Title</div>
       </div>
 
       <br />
       <div>
         <label for="description" class="form-label">description</label>
-        <textarea
-          name="description"
-          rows="4"
-          placeholder="Enter description"
-          cols="20"
-          class="form-control"
-        >
+        <textarea name="description" class="form-control" rows="5" required>
         </textarea>
+        <div class="invalid-feedback">Please Enter valid Description</div>
       </div>
       <br />
 
@@ -46,18 +49,22 @@
           name="filename"
           placeholder="Enter image FileName"
           class="form-control"
+          required
         />
+        <div class="invalid-feedback">Please Enter valid FileName</div>
         <br />
       </div>
       <div class="row">
         <div class="mb-3 col-4">
           <label for="number" class="form-label">number</label>
           <input
-            type="number"
             name="price"
             placeholder="Enter Price"
             class="form-control"
+            required
+            type="number"
           />
+          <div class="invalid-feedback">Please Enter valid Price</div>
           <br />
         </div>
         <div class="mb-3 col-8">
@@ -67,7 +74,9 @@
             name="country"
             placeholder="Enter Your Country"
             class="form-control"
+            required
           />
+          <div class="invalid-feedback">Please Enter valid Country</div>
           <br />
         </div>
       </div>
@@ -78,10 +87,13 @@
           name="location"
           class="form-control"
           placeholder="Enter Your location"
-        /><br />
+          required
+        />
+        <div class="invalid-feedback">Please Enter valid Location</div>
+        <br />
       </div>
 
-      <div><button  class="btn btn-dark add-btn">Add</button></div>
+      <div><button class="btn btn-dark add-btn">Add</button></div>
       <br />
     </form>
   </div>
