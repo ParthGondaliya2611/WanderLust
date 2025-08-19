@@ -81,7 +81,7 @@
           <p class="card-text"><%=review.rating %> stars</p>
         </div>
         <form
-          action="/listings/<%= list._id %>/reviews/<%=review._id %>?_method=DELETE"
+          action="/listings/<%=list?._id %>/reviews/<%=review._id %>?_method=DELETE"
           method="post"
           class="mt-1 mb-1"
         >

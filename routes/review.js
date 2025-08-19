@@ -6,6 +6,7 @@ const ExpresError = require("../utils/ExpressError");
 const wrapAsync = require("../utils/wrapAsync");
 const { reviewSchema } = require("../Schema");
 const { isReviewAuthor } = require("../middleware");
+const ReviewController = require("../Controller/ReviewController");
 
 const validateRating = (req, res, next) => {
   let { error } = reviewSchema.validate(req.body);
@@ -20,32 +21,14 @@ const validateRating = (req, res, next) => {
 router.post(
   "/reviews",
   validateRating,
-  wrapAsync(async (req, res) => {
-    let { id } = req.params;
-    let { comment, rating } = req.body;
-
-    let listing = await Listing.findById(id);
-    let newReview = new Review({ comment: comment, rating: rating });
-
-    newReview.author = res.locals.currUser._id;
-    await newReview.save();
-    listing.reviews.push(newReview);
-    await listing.save();
-
-    res.redirect(`/listings/${id}`);
-  })
+  wrapAsync(ReviewController.createReview)
 );
 
 //Delete the Review
 router.delete(
   "/reviews/:reviewId",
   isReviewAuthor,
-  wrapAsync(async (req, res) => {
-    let { id, reviewId } = req.params;
-    await Listing.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
-    await Review.findByIdAndDelete(reviewId);
-    res.redirect(`/listings/${id}`);
-  })
+  wrapAsync(ReviewController.deleteReview)
 );
 
 module.exports = router;

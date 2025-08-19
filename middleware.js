@@ -33,7 +33,7 @@ module.exports.isOwner = async (req, res, next) => {
 module.exports.isReviewAuthor = async (req, res, next) => {
   let { id, reviewId } = req.params;
   let review = await Review.findById(reviewId);
-  if (!res.locals.currUser.equals(review.author)) {
+  if (!res?.locals?.currUser?.equals(review.author)) {
     req.flash("error", "You  are not author to delete");
     return res.redirect(`/listings/${id}`);
   }
