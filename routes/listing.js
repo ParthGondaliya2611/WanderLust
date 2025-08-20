@@ -6,6 +6,9 @@ const wrapAsync = require("../utils/wrapAsync");
 const { listingSchema } = require("../Schema");
 const { isLoggedIn, isOwner, isReviewAuthor } = require("../middleware.js");
 const ListingController = require("../Controller/ListingController.js");
+const multer = require("multer");
+const { storage } = require("../cloudConfig.js");
+const upload = multer({ storage });
 
 //validate listing middleware
 
@@ -32,7 +35,15 @@ router.get(
 );
 
 //create new Listing
-router.post("/", validetListing, wrapAsync(ListingController.createListing));
+router.post(
+  "/",
+  upload.single("image"),
+  (req, res) => {
+    res.send(req.files);
+  }
+  // validetListing,
+  // wrapAsync(ListingController.createListing)
+);
 
 //Edit Route
 router.get(

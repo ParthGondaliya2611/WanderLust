@@ -1,4 +1,4 @@
-const { isLoggedIn } = require("../middleware");
+// const { isLoggedIn } = require("../middleware");
 const Listing = require("../Model/Listing");
 
 const ListingController = {
@@ -46,6 +46,8 @@ const ListingController = {
     });
 
     await newlist.save();
+
+    console.log(newlist);
 
     req.flash("success", "New Listing Created ");
     res.redirect("/listings");
